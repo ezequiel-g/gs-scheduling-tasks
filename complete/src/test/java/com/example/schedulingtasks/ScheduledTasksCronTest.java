@@ -29,46 +29,38 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 @SpringBootTest
-public class ScheduledTasksTest {
+public class ScheduledTasksCronTest {
 
 	private static final Duration TEST_DURATION = TEN_SECONDS;
 	
-	private static final Duration TEST_INITIAL_DELAY = Duration.ofMillis(3 * 1000);
-
-	/**
-	 * Subject Under Test
-	 */
 	@SpyBean
-	private ScheduledTasks tasks;
-
+	private ScheduledTasksCron tasks;
+	
 	@Test
-	public void reportCurrentTime() {
+	public void cronExample() {
 		// arrange
-		// FIXED_RATE_MILLIS 5 seconds.
-		final int fixedRateSeconds = 5;
+		// CRON CONFIGURATION */5.
+		final int cronSetupEveryFiveSeconds = 5;
 		
 		// this allow us to calculate the number of invocations
-		final int validationDurationInSeconds = (int) (TEST_DURATION.getSeconds() - TEST_INITIAL_DELAY.getSeconds());
-		
-		final int minNumberOfInvocations = Math.round(validationDurationInSeconds / fixedRateSeconds);
+		final int validationDurationInSeconds = (int) TEST_DURATION.getSeconds();
+
+		final int minNumberOfInvocations = Math.round(validationDurationInSeconds / cronSetupEveryFiveSeconds);
 		final int maxNumberOfInvocations = minNumberOfInvocations + 1;
 		
 		// act - is launch by scheduler
 		
 		// assert
 		await()
-			// INITIAL DELAY
-			.atLeast(TEST_INITIAL_DELAY)
 			// MAX TEST TIME
 			.atMost(TEST_DURATION)
 			// VERIFICATION
 			.untilAsserted(() -> 
 				// EXPECTED MIN INVOCATIONS
-				verify(tasks, atLeast(minNumberOfInvocations)).reportCurrentTime()
+				verify(tasks, atLeast(minNumberOfInvocations)).cronExample()
 			);
 		
 		// EXPECTED MAX INVOCATIONS DURING TEST.
-		verify(tasks, atMost(maxNumberOfInvocations)).reportCurrentTime();
+		verify(tasks, atMost(maxNumberOfInvocations)).cronExample();
 	}
-
 }

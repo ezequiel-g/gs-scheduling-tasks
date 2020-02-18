@@ -16,22 +16,23 @@
 
 package com.example.schedulingtasks;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
-@SpringBootTest
-public class SchedulingTasksApplicationTest {
+@Component
+public class ScheduledTasksCron {
 
-	@Autowired
-	private ScheduledTasks tasks;
+	private static final Logger log = LoggerFactory.getLogger(ScheduledTasksCron.class);
 
-	@Test
-	public void contextLoads() {
-		// Basic integration test that shows the context starts up properly
-		assertThat(tasks).isNotNull();
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+	@Scheduled(cron = "*/5 * * * * *")
+	public void cronExample() {
+		log.info("##cronExample()## running at: {}", dateFormat.format(new Date()));
 	}
-
 }

@@ -18,6 +18,7 @@ package com.example.schedulingtasks;
 
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Durations.TEN_SECONDS;
+import static org.awaitility.Durations.TWO_SECONDS;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.atMost;
@@ -29,28 +30,28 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 @SpringBootTest
-public class ScheduledTasksTest {
+public class ScheduledTasksFixedDelayTest {
 
 	private static final Duration TEST_DURATION = TEN_SECONDS;
-	
-	private static final Duration TEST_INITIAL_DELAY = Duration.ofMillis(3 * 1000);
+
+	private static final Duration TEST_INITIAL_DELAY = TWO_SECONDS;
 
 	/**
 	 * Subject Under Test
 	 */
 	@SpyBean
-	private ScheduledTasks tasks;
+	private ScheduledTasksFixedDelay tasks;
 
 	@Test
-	public void reportCurrentTime() {
+	public void fixedDelayExample() {
 		// arrange
-		// FIXED_RATE_MILLIS 5 seconds.
-		final int fixedRateSeconds = 5;
+		// FIXED DELAY 3 seconds.
+		final int fixedDelaySeconds = 3;
 		
 		// this allow us to calculate the number of invocations
 		final int validationDurationInSeconds = (int) (TEST_DURATION.getSeconds() - TEST_INITIAL_DELAY.getSeconds());
 		
-		final int minNumberOfInvocations = Math.round(validationDurationInSeconds / fixedRateSeconds);
+		final int minNumberOfInvocations = Math.round(validationDurationInSeconds / fixedDelaySeconds);
 		final int maxNumberOfInvocations = minNumberOfInvocations + 1;
 		
 		// act - is launch by scheduler
@@ -64,11 +65,11 @@ public class ScheduledTasksTest {
 			// VERIFICATION
 			.untilAsserted(() -> 
 				// EXPECTED MIN INVOCATIONS
-				verify(tasks, atLeast(minNumberOfInvocations)).reportCurrentTime()
+				verify(tasks, atLeast(minNumberOfInvocations)).fixedDelayExample()
 			);
 		
 		// EXPECTED MAX INVOCATIONS DURING TEST.
-		verify(tasks, atMost(maxNumberOfInvocations)).reportCurrentTime();
+		verify(tasks, atMost(maxNumberOfInvocations)).fixedDelayExample();
 	}
 
 }

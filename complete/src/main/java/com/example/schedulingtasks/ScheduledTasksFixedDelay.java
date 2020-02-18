@@ -25,25 +25,33 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ScheduledTasks {
+public class ScheduledTasksFixedDelay {
 
-	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+	private static final Logger log = LoggerFactory.getLogger(ScheduledTasksFixedDelay.class);
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
 	/**
-	 * initial delay 3 seconds in milliseconds.
+	 * initial delay 2 seconds in milliseconds.
 	 */
-	private static final int INITIAL_DELAY = 3 * 1000;
+	private static final int INITIAL_DELAY = 2 * 1000;
 
 	/**
-	 * fixed rate 5 seconds in milliseconds.
+	 * fixed delay 3 seconds in milliseconds.
 	 */
-	private static final int FIXED_RATE = 5 * 1000;
+	private static final int FIXED_DELAY = 3 * 1000;
 
-	@Scheduled(initialDelay = INITIAL_DELAY, fixedRate = FIXED_RATE)
-	public void reportCurrentTime() {
-		log.info("#reportCurrentTime()# The time is now {}", dateFormat.format(new Date()));
+	@Scheduled(initialDelay = INITIAL_DELAY, fixedDelay = FIXED_DELAY)
+	public void fixedDelayExample() {
+		log.info("###fixedDelayExample()### The time is now {}", dateFormat.format(new Date()));
+
+		// SIMULATE TIME CONSUMING PROCESS.
+		try {
+			final int forceProcessingTime = 3 * 1000;
+			Thread.sleep(forceProcessingTime);
+		} catch (final InterruptedException e) {
+			log.warn("fixedDelayExample() interrupted", e);
+		}
 	}
 
 }
