@@ -1,0 +1,13 @@
+TODOs:
+
+TESTING. Integration Testing.
+	1- how to run only one scheduler during tests? Can be run without bringing up full SpringBoot?
+		https://www.baeldung.com/spring-testing-scheduled-annotation
+	2- how to run the test faster when we have a large waiting time? For example: every 2 days.
+		I think that validating the cron configuration for production, but using shorting running time on test will work.
+		See how it will impact if there are related tasks.
+		Option 2: Extend class and redefine short waiting time on test. Would it work?
+	3- how to calculate based on schedule task values?
+		minNumberOfInvocations, maxNumberOfInvocations, TEST_DURATION.
+		Improve Maintainability.
+	
