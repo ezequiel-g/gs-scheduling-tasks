@@ -5,8 +5,9 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.2.4.RELEASE</version>
+		<relativePath/>
+		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>scheduling-tasks</artifactId>
@@ -16,17 +17,25 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<!-- FRAMEWORK -->
+		<!-- defined has parent spring-boot-starter-parent -->
+		
+		<!-- TEST -->
+		<!-- awaitility.version: 4.0.2 defined spring-boot-starter-parent -->
 	</properties>
 
 	<dependencies>
+		<!-- FRAMEWORK -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+		
+		<!-- TEST -->
 		<dependency>
 			<groupId>org.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
-			<version>3.1.2</version>
+			<!-- version 4.0.2 defined in spring-boot-starter-parent -->
 			<scope>test</scope>
 		</dependency>
 
