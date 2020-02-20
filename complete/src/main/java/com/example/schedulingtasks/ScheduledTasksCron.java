@@ -29,10 +29,9 @@ public class ScheduledTasksCron {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasksCron.class);
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
 	@Scheduled(cron = "*/5 * * * * *")
 	public void cronExample() {
-		log.info("##cronExample()## running at: {}", dateFormat.format(new Date()));
+		final String timeAsString = new SimpleDateFormat("HH:mm:ss").format(new Date());
+		log.info("##cronExample()## running at: {}", timeAsString);
 	}
 }

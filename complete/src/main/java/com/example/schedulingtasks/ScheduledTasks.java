@@ -29,8 +29,6 @@ public class ScheduledTasks {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
 	/**
 	 * initial delay 3 seconds in milliseconds.
 	 */
@@ -43,7 +41,8 @@ public class ScheduledTasks {
 
 	@Scheduled(initialDelay = INITIAL_DELAY, fixedRate = FIXED_RATE)
 	public void reportCurrentTime() {
-		log.info("#reportCurrentTime()# The time is now {}", dateFormat.format(new Date()));
+		final String timeAsString = new SimpleDateFormat("HH:mm:ss").format(new Date());
+		log.info("#reportCurrentTime()# The time is now {}", timeAsString);
 	}
 
 }

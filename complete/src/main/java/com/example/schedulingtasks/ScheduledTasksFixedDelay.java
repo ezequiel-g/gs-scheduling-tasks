@@ -29,8 +29,6 @@ public class ScheduledTasksFixedDelay {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasksFixedDelay.class);
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
 	/**
 	 * initial delay 2 seconds in milliseconds.
 	 */
@@ -43,7 +41,8 @@ public class ScheduledTasksFixedDelay {
 
 	@Scheduled(initialDelay = INITIAL_DELAY, fixedDelay = FIXED_DELAY)
 	public void fixedDelayExample() {
-		log.info("###fixedDelayExample()### The time is now {}", dateFormat.format(new Date()));
+		final String timeAsString = new SimpleDateFormat("HH:mm:ss").format(new Date());
+		log.info("###fixedDelayExample()### The time is now {}", timeAsString);
 
 		// SIMULATE TIME CONSUMING PROCESS.
 		try {
@@ -51,6 +50,8 @@ public class ScheduledTasksFixedDelay {
 			Thread.sleep(forceProcessingTime);
 		} catch (final InterruptedException e) {
 			log.warn("fixedDelayExample() interrupted", e);
+			Thread.interrupted();
+			throw new RuntimeException(e);
 		}
 	}
 
