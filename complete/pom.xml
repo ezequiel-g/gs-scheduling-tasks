@@ -36,7 +36,6 @@
 			<groupId>org.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
 			<!-- version 4.0.2 defined in spring-boot-starter-parent -->
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>

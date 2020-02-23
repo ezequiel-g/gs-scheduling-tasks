@@ -16,7 +16,10 @@
 
 package com.example.schedulingtasks;
 
+import static org.awaitility.Awaitility.await;
+
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -44,15 +47,9 @@ public class ScheduledTasksFixedDelay {
 		final String timeAsString = new SimpleDateFormat("HH:mm:ss").format(new Date());
 		log.info("###fixedDelayExample()### The time is now {}", timeAsString);
 
-		// SIMULATE TIME CONSUMING PROCESS.
-		try {
-			final int forceProcessingTime = 3 * 1000;
-			Thread.sleep(forceProcessingTime);
-		} catch (final InterruptedException e) {
-			log.warn("fixedDelayExample() interrupted", e);
-			Thread.interrupted();
-			throw new RuntimeException(e);
-		}
+		// force processing time
+		final int forceProcessingTime = 3 * 1000;
+		await().during(Duration.ofMillis(forceProcessingTime));
 	}
 
 }
