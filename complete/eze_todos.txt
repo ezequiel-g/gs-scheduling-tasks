@@ -1,5 +1,13 @@
 TODOs:
 
+Actuator for scheduledtasks.
+https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/actuator-api/html/
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html
+http://localhost:8080/actuator/scheduledtasks
+
+	1- required spring-boot-starter-web
+
 TESTING. Integration Testing.
 	1- how to run only one scheduler during tests? Can be run without bringing up full SpringBoot?
 		https://www.baeldung.com/spring-testing-scheduled-annotation
