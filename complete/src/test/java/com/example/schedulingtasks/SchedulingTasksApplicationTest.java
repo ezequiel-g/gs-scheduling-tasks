@@ -27,11 +27,19 @@ public class SchedulingTasksApplicationTest {
 
 	@Autowired
 	private ScheduledTasks tasks;
+	
+	@Autowired
+	private ScheduledTasksCron tasksCron;
+	
+	@Autowired
+	private ScheduledTasksFixedDelay tasksFixedDelay;
 
 	@Test
 	public void contextLoads() {
 		// Basic integration test that shows the context starts up properly
 		assertThat(tasks).isNotNull();
+		assertThat(tasksCron).isNotNull();
+		assertThat(tasksFixedDelay).isNotNull();
 	}
 
 }
